@@ -1,36 +1,40 @@
+var after = function(millis, fn) {
+	window.setTimeout(fn, millis);
+}
+
 $(document).ready(function() {
 
+	var indicator = $('#indicator div');
+
 	$('button.dynamic').click(function() {
-		$('.indicator div').show().addClass('phase-1').removeClass('phase-2 finishing static static-2');
-		_.delay(function() {
-			$('.indicator div').removeClass('phase-1').addClass('phase-2');
-			_.delay(function() {
-			$('.indicator div').addClass('finishing');
-				_.delay(function() {
-					$('.phase-2').removeClass('finishing').hide();
-				}, 2000);
-			}, 5000);
-		}, 2000);
+		$('#indicator').removeClass('out');
+		indicator.show().removeClass().addClass('phase-1');
+		after(2000, function() {
+			indicator.removeClass().addClass('phase-2');
+			after(3000, function() {
+				indicator.addClass('finishing');
+				after(2000, function() {
+					$('#indicator').addClass('out');
+					after(200, function() {
+						indicator.removeClass().hide();
+					});
+				});
+			});
+		});
 	});
 
 	$('button.static').click(function() {
-		$('.indicator div').show().addClass('phase-1 static').removeClass('phase-2 finishing static-2');
-		_.delay(function() {
-			$('.indicator div').removeClass('phase-1').addClass('phase-2');
-			_.delay(function() {
-				$('.indicator div').hide();
-			}, 5000);
-		}, 2000);
-	});
-
-	$('button.static-2').click(function() {
-		$('.indicator div').show().addClass('phase-1 static-2').removeClass('phase-2 finishing static');
-		_.delay(function() {
-			$('.indicator div').removeClass('phase-1').addClass('phase-2');
-			_.delay(function() {
-				$('.indicator div').hide();
-			}, 7000);
-		}, 2000);
+		$('#indicator').removeClass('out');
+		indicator.show().removeClass().addClass('phase-1 static');
+		after(2000, function() {
+			indicator.removeClass().addClass('phase-2 static');
+			after(5000, function() {
+				$('#indicator').addClass('out');
+				after(200, function() {
+					indicator.removeClass().hide();
+				});
+			});
+		});
 	});
 
 });
