@@ -8,13 +8,27 @@
 	<script type="text/javascript" src="./js/app.js"></script>
 </head>
 <body>
+<p>
+  <strong>Spec for bug <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=759252">759252</a></strong>
+</p>
 <div class="backdrop">
 	<div id="indicator" class="indicator out">
 		<div></div>
 	</div>
 </div>
-<button class="static">Static</button>
-<button class="dynamic">Dynamic</button>
+<button class="dynamic"><strong>Load something</strong></button>
+<button class="static">Static indicator (for reference)</button>
+
+<p style="clear:both; margin-top:60px;">
+  <strong>Notes</strong><br>
+  <ul style="width:60%">
+    <li>The objective of the design is to make the waiting time appear shorter.</li>
+    <li>A quick animation at the beginning (the scaling up) makes the browser look more responsive</li>
+    <li>Having the speed of the second phase throbber increase gives the impression of a faster load time (try the static indicator without acceleration as a reference)</li>
+    <li>The quick scale-down animation at the end emphasizes the speed of the entire operation by making it end quickly and smoothly (peak/end rule)</li>
+  </ul>
+</p>
+
 <div class="preload"></div>
 </body>
 </html>
